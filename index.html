@@ -7,7 +7,7 @@
     <title>Green Earth</title>
     <link href="https://cdn.jsdelivr.net/npm/daisyui@5" rel="stylesheet" type="text/css" />
     <link rel="shortcut icon" href="./assets/favicon.ico" type="image/x-icon">
-<script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <link rel="stylesheet" href="style.css">
 </head>
 
@@ -18,7 +18,7 @@
             <span class="space-x-4 text-xs font-semibold">
                 <a href="#about">About</a>
                 <a href="#shop">Gallery</a>
-                <a href="#hero">Plant a Tree</a>
+                <a href="#form">Plant a Tree</a>
             </span>
             <button class="btn btn-warning rounded-full">Plant a Tree</button>
         </nav>
@@ -34,13 +34,16 @@
         <section id="shop" class="grid grid-cols-[15%_65%_20%] w-11/12 mx-auto gap-4">
             <aside class="space-y-2">
                 <h5 class="font-semibold text-lg">Categories</h5>
-                <button class="font-medium text-sm text-left hover:bg-[#15803D] hover:text-white w-full px-4 py-2 rounded transition-all duration-300 transition-discrete">All Trees</button>
+                <button
+                    class="font-medium text-sm text-left hover:bg-[#15803D] hover:text-white w-full px-4 py-2 rounded transition-all duration-300 transition-discrete">All
+                    Trees</button>
             </aside>
             <div class="grid grid-cols-3 place-content-center">
                 <span class="bg-white rounded-lg p-4 space-y-2">
                     <img src="./assets/hero-leaf1.png" alt="tree" class="w-full object-contain bg-gray-300 rounded-lg">
                     <h6 class="font-semibold text-sm">Mango Tree</h6>
-                    <small class="text-gray-500 font-medium text-xs">A fast-growing tropical tree that produces delicious, juicy mangoes during summer. Its dense
+                    <small class="text-gray-500 font-medium text-xs">A fast-growing tropical tree that produces
+                        delicious, juicy mangoes during summer. Its dense
                         green</small>
                     <span class="flex items-center justify-between my-3">
                         <div class="flex items-center flex-wrap gap-1">
@@ -48,7 +51,9 @@
                         </div>
                         <p>৳500</p>
                     </span>
-                    <button class="font-medium text-sm bg-[#15803D] hover:bg-[#126d33] text-white w-full px-4 py-2 rounded-full transition-all duration-300 transition-discrete">Add to Cart</button>
+                    <button
+                        class="font-medium text-sm bg-[#15803D] hover:bg-[#126d33] text-white w-full px-4 py-2 rounded-full transition-all duration-300 transition-discrete">Add
+                        to Cart</button>
                 </span>
             </div>
             <aside class="space-y-2 bg-white rounded-lg p-4">
@@ -100,13 +105,25 @@
                 </span>
             </div>
         </section>
-        <section>
-            <form action="">
-
+        <section id="form" class="bg-emerald-700  px-4 py-6">
+            <h3 class="text-center mx-1 my-3 text-white font-semibold text-xl">Plant a Tree Today</h3>
+            <form action="" class="flex items-center justify-center flex-col gap-3 rounded-lg">
+                <input type="text" placeholder="Your Name" class="input" />
+                <input type="text" placeholder="Your Email Address" class="input" />
+                <select class="select">
+                    <option disabled selected>Number of Trees</option>
+                    <option>less than 50</option>
+                    <option>50 to 100</option>
+                    <option>100 to 500</option>
+                    <option>500 to 1000</option>
+                    <option>more than 1000</option>
+                </select>
+                <button class="btn btn-warning rounded-full btn-wide">Donate Now</button>
             </form>
         </section>
     </main>
-    <footer class="text-xs flex items-center justify-center px-2 py-4 bg-emerald-900 text-white">&copy 2025 Green Earth. All
+    <footer class="text-xs flex items-center justify-center px-2 py-4 bg-emerald-900 text-white">&copy 2025 Green Earth.
+        All
         Rights Reserved.</footer>
 </body>
 
