@@ -93,6 +93,15 @@ cartBox.addEventListener("click", (e) => {
 
 //  checkout button functionality
 cartContainer.querySelector("button").addEventListener("click", () => {
+    let price = cartContainer.querySelector("div > p:last-child > span").innerText;
+    if(price > 0) alert(`Your order of is ৳${price} successfully submitted`);
     cartBox.innerHTML = "";
     cartContainer.querySelector("div > p:last-child > span").innerText = 0
+})
+
+//  donation form
+document.getElementById("form").addEventListener("submit", (e) => {
+    e.preventDefault();
+    alert(`Thank you ${e.target.name.value} for donating with us`);
+    e.target.reset();
 })

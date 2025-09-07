@@ -20,7 +20,7 @@
                 <a href="#shop">Gallery</a>
                 <a href="#form">Plant a Tree</a>
             </span>
-            <button class="btn btn-warning rounded-full">Plant a Tree</button>
+            <a href="#form" class="btn btn-warning rounded-full">Plant a Tree</a>
         </nav>
     </header>
     <main>
@@ -28,9 +28,23 @@
             <h1 class="text-4xl font-bold">Plant a Tree, Grow a Future</h1>
             <p class="text-sm">Join our mission to plant 1 million trees and make the Earth greener for future <br>
                 generations.</p>
-            <button class="btn btn-warning rounded-full">Get Involved</button>
+            <a href="#form" class="btn btn-warning rounded-full">Get Involved</a>
         </section>
         <h2 class="text-center my-4 mx-1 text-2xl font-semibold">Choose Your Trees</h2>
+        <!-- Open the modal using ID.showModal() method -->
+        <button class="btn" onclick="my_modal_5.showModal()">open modal</button>
+        <dialog id="my_modal_5" class="modal modal-bottom sm:modal-middle">
+            <div class="modal-box">
+                <h3 class="text-lg font-bold">Hello!</h3>
+                <p class="py-4">Press ESC key or click the button below to close</p>
+                <div class="modal-action">
+                    <form method="dialog">
+                        <!-- if there is a button in form, it will close the modal -->
+                        <button class="btn">Close</button>
+                    </form>
+                </div>
+            </div>
+        </dialog>
         <section id="shop" class="grid grid-cols-[15%_65%_20%] w-11/12 mx-auto gap-4">
             <aside class="space-y-2">
                 <h5 class="font-semibold text-lg">Categories</h5>
@@ -85,8 +99,8 @@
         <section id="form" class="bg-emerald-700  px-4 py-6">
             <h3 class="text-center mx-1 my-3 text-white font-semibold text-xl">Plant a Tree Today</h3>
             <form action="" class="flex items-center justify-center flex-col gap-3 rounded-lg">
-                <input type="text" placeholder="Your Name" class="input" />
-                <input type="text" placeholder="Your Email Address" class="input" />
+                <input type="text" name="name" placeholder="Your Name" class="input" />
+                <input type="email" name="email" placeholder="Your Email Address" class="input" />
                 <select class="select">
                     <option disabled selected>Number of Trees</option>
                     <option>less than 50</option>
