@@ -1,40 +1,55 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
-*{
+
+* {
     scroll-behavior: smooth;
 }
-body{
+
+body {
     font-family: "Poppins", sans-serif;
     background-color: #f0fdf4;
 }
-button{
+
+button {
     cursor: pointer;
 }
-.active{
+
+.active {
     background-color: #0c4d24;
     color: white;
 }
-#hero{
+
+#hero {
     background-image: url(./assets/hero-leaf1.png), url(./assets/hero-leaf2.png);
     background-repeat: no-repeat;
     background-size: contain;
     background-position: left bottom, right bottom;
 }
+
 @keyframes fadeDown {
-  from {
-    opacity: 0;
-    transform: translateY(-4px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+    from {
+        opacity: 0;
+        transform: translateY(-4px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
-@media screen and (max-width:500px) {
-    #hero{
-        background-image: url(./assets/hero-leaf1.png);
+@media screen and (max-width:1050px) {
+    #hero {
+        background-image: url(./assets/hero-leaf1.png), url(./assets/hero-leaf2.png);
         background-repeat: no-repeat;
-        background-size: contain;
-        background-position: left bottom;
+        background-size: auto 60%;
+        background-position: left bottom, right bottom;
+    }
+}
+@media screen and (max-width:500px) {
+    #hero {
+        background-image: url(./assets/hero-leaf1.png), url(./assets/hero-leaf2.png);
+        background-repeat: no-repeat;
+        background-size: auto 40%;
+        background-position: left bottom, right bottom;
     }
 }
