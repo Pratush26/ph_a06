@@ -23,7 +23,7 @@ async function allPlants(url) {
         card.innerHTML = `<img src=${e.image} 
                                 loading="lazy" 
                                 class="w-full aspect-video object-cover object-center bg-gray-300 rounded-lg">
-                    <h6 class="font-semibold text-sm">${e.name}</h6>
+                    <h6 data-id="${e.id}" class="font-semibold text-sm hover:cursor-pointer">${e.name}</h6>
                     <small class="text-gray-500 font-medium text-xs">${e.description}</small>
                     <span class="flex items-center justify-between my-3">
                         <span class="bg-emerald-100 p-1 rounded text-xs font-medium">${e.category}</span>
@@ -65,7 +65,31 @@ categoryContainer.addEventListener("click", (e) => {
     }
 });
 
-//  add to cart functionality
+//  create modal
+let createModal = async (e) => {
+    let data = await (await fetch(`https://openapi.programming-hero.com/api/plant/${e}`)).json();
+    console.log(data)
+    document.getElementById("my_modal_5").innerHTML = `<div class="modal-box">
+        <section class="grid grid-cols-2 place-content-center gap-3">
+            <img src="${data.plants.image}" class="h-full object-contain rounded-lg">
+            <div class="flex flex-col items-center justify-evenly gap-1 h-full">
+                <h6 class="font-semibold">${data.plants.name}</h6>
+                <small class="text-gray-500 font-medium text-sm">${data.plants.description}</small>
+                <div class="modal-action flex flex-col items-center justify-center w-full">
+                    <span class="flex items-center justify-between my-3 w-full">
+                        <span class="bg-emerald-100 p-1 rounded text-xs font-medium">${data.plants.category}</span>
+                        <p>৳<span>${data.plants.price}</span></p>
+                    </span>
+                    <form method="dialog">
+                        <button class="btn btn-neutral">Close</button>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </div>`;
+    my_modal_5.showModal();
+}
+//  add to cart functionality   &&  tree details functionality
 container.addEventListener("click", (e) => {
     if (e.target.matches("button")) {
         let card = document.createElement("div");
@@ -79,8 +103,11 @@ container.addEventListener("click", (e) => {
                         </span>
                         <button>x</button>`;
         cartBox.appendChild(card);
+        calculatePrice();
     }
-    calculatePrice();
+    else if (e.target.matches("h6")) {
+        createModal(e.target.dataset.id);
+    }
 });
 
 //  remove from cart
@@ -94,7 +121,7 @@ cartBox.addEventListener("click", (e) => {
 //  checkout button functionality
 cartContainer.querySelector("button").addEventListener("click", () => {
     let price = cartContainer.querySelector("div > p:last-child > span").innerText;
-    if(price > 0) alert(`Your order of is ৳${price} successfully submitted`);
+    if (price > 0) alert(`Your order of is ৳${price} successfully submitted`);
     cartBox.innerHTML = "";
     cartContainer.querySelector("div > p:last-child > span").innerText = 0
 })
