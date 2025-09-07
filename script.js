@@ -14,12 +14,15 @@ let calculatePrice = () => {
 
 //  plant filtering functionality
 async function allPlants(url) {
-    container.innerHTML = "";
+    container.innerHTML = `<span class="loading col-span-3 mx-auto loading-dots loading-lg"></span>`;
     let data = await (await fetch(url)).json();
+    container.innerHTML = "";
     data.plants.map(e => {
         let card = document.createElement("span");
         card.className = "bg-white rounded-lg p-4 flex flex-col gap-2 justify-evenly h-full";
-        card.innerHTML = `<img src=${e.image} class="w-full aspect-video object-cover object-center bg-gray-300 rounded-lg">
+        card.innerHTML = `<img src=${e.image} 
+                                loading="lazy" 
+                                class="w-full aspect-video object-cover object-center bg-gray-300 rounded-lg">
                     <h6 class="font-semibold text-sm">${e.name}</h6>
                     <small class="text-gray-500 font-medium text-xs">${e.description}</small>
                     <span class="flex items-center justify-between my-3">
@@ -36,7 +39,11 @@ allPlants("https://openapi.programming-hero.com/api/plants");
 
 //  category buttons functions
 async function allCategory(url) {
+    let loader = document.createElement("span");
+    loader.className = "loading loading-dots loading-md";
+    categoryContainer.appendChild(loader);
     let data = await (await fetch(url)).json();
+    loader.remove();
     data.categories.map(e => {
         let card = document.createElement("button");
         card.className = "font-medium text-sm text-left hover:bg-[#15803D] hover:text-white w-full px-4 py-2 rounded transition-all duration-300 transition-discrete";
@@ -62,10 +69,13 @@ categoryContainer.addEventListener("click", (e) => {
 container.addEventListener("click", (e) => {
     if (e.target.matches("button")) {
         let card = document.createElement("div");
-        card.className = "flex items-center justify-between bg-[#CFF0DC] rounded p-2";
+        card.className =
+            "flex items-center justify-between bg-[#CFF0DC] rounded p-2 animate-[fadeDown_0.3s_ease-out]";
         card.innerHTML = `<span>
                             <small class="font-semibold">${e.target.parentElement.querySelector("h6").innerText}</small>
-                            <p class="text-sm text-gray-600">৳<span>${e.target.parentElement.querySelector("span > p > span").innerText}</span> x 1</p>
+                            <p class="text-sm text-gray-600">
+                                ৳<span>${e.target.parentElement.querySelector("span > p > span").innerText}</span> x 1
+                             </p>
                         </span>
                         <button>x</button>`;
         cartBox.appendChild(card);
@@ -75,10 +85,10 @@ container.addEventListener("click", (e) => {
 
 //  remove from cart
 cartBox.addEventListener("click", (e) => {
-  if (e.target.matches("button")) {
-    e.target.parentElement.remove();
-    calculatePrice();
-  }
+    if (e.target.matches("button")) {
+        e.target.parentElement.remove();
+        calculatePrice();
+    }
 });
 
 //  checkout button functionality
