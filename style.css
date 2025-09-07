@@ -29,3 +29,12 @@ button{
     transform: translateY(0);
   }
 }
+
+@media screen and (max-width:500px) {
+    #hero{
+        background-image: url(./assets/hero-leaf1.png);
+        background-repeat: no-repeat;
+        background-size: contain;
+        background-position: left bottom;
+    }
+}
