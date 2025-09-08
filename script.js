@@ -6,8 +6,8 @@ let cartBox = document.getElementById("cartBox");
 //  price calculator
 let calculatePrice = () => {
     let cartPrice = 0;
-    cartBox.querySelectorAll("p > span").forEach(e => {
-        cartPrice += parseInt(e.innerText)
+    cartBox.querySelectorAll("p").forEach(e => {
+        cartPrice += parseInt(e.children[0].innerText) * parseInt(e.children[1].innerText)
     })
     cartContainer.querySelector("div > p:last-child > span").innerText = cartPrice;
 }
@@ -30,6 +30,8 @@ async function allPlants(url) {
                         <p>৳<span>${e.price}</span></p>
                     </span>
                     <button
+                        data-name="${e.name}"
+                        data-price="${e.price}"
                         class="font-medium text-sm bg-[#15803D] hover:bg-[#126d33] text-white w-full px-4 py-2 rounded-full transition-all duration-300 transition-discrete">Add
                         to Cart</button>`;
         container.appendChild(card);
@@ -92,17 +94,27 @@ let createModal = async (e) => {
 //  add to cart functionality   &&  tree details functionality
 container.addEventListener("click", (e) => {
     if (e.target.matches("button")) {
+        let c = Array.from(cartBox.querySelectorAll("small")).find(c => c.innerText == e.target.dataset.name);
+        if (c){
+            let cart = c.parentElement.querySelector("p").children[1];
+            cart.innerText = parseInt(cart.innerText) + 1;
+        } else{
         let card = document.createElement("div");
         card.className =
             "flex items-center justify-between bg-[#CFF0DC] rounded p-2 animate-[fadeDown_0.3s_ease-out]";
-        card.innerHTML = `<span>
-                            <small class="font-semibold">${e.target.parentElement.querySelector("h6").innerText}</small>
+        card.innerHTML = `<span class="space-y-1">
+                            <small class="font-semibold">${e.target.dataset.name}</small>
                             <p class="text-sm text-gray-600">
-                                ৳<span>${e.target.parentElement.querySelector("span > p > span").innerText}</span> x 1
-                             </p>
+                                ৳<span>${e.target.dataset.price}</span> x <span>1</span>
+                            </p>
+                            <div class="flex items-center justify-between gap-2">
+                                <button class="btn btn-neutral h-fit rounded-full">+</button>
+                                <button class="btn btn-neutral h-fit rounded-full">-</button>
+                            </div>
                         </span>
                         <button>x</button>`;
         cartBox.appendChild(card);
+        }
         calculatePrice();
     }
     else if (e.target.matches("h6")) {
@@ -110,10 +122,19 @@ container.addEventListener("click", (e) => {
     }
 });
 
-//  remove from cart
+//  remove from cart && increment and decrement
 cartBox.addEventListener("click", (e) => {
     if (e.target.matches("button")) {
-        e.target.parentElement.remove();
+        if (e.target.innerText == "x") e.target.parentElement.remove();
+        else if (e.target.innerText == "+") {
+            let quent = e.target.parentElement.parentElement.querySelector("p").children[1];
+            quent.innerText = parseInt(quent.innerText) + 1;
+        }
+        else if (e.target.innerText == "-") {
+            let quent = e.target.parentElement.parentElement.querySelector("p").children[1];
+            if (parseInt(quent.innerText) > 1) quent.innerText = parseInt(quent.innerText) - 1;
+            else if (parseInt(quent.innerText) == 1) e.target.parentElement.parentElement.parentElement.remove();
+        }
         calculatePrice();
     }
 });
